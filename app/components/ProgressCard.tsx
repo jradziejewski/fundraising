@@ -9,44 +9,42 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
-import {Donator} from "./Donator";
-
-const features = [
-  {
-    title: "Fuel Positive Change",
-    description:
-      "Join a community dedicated to making a difference. Your support amplifies our ability to create positive impacts that resonate beyond boundaries.",
-  },
-  {
-    title: "Interactive Q&A Experience",
-    description:
-      "Engage with our initiatives through interactive Q&A dropdowns. Learn more about the goals, challenges, and the impact your donation can make.",
-  },
-  {
-    title: "Exclusive Rewards",
-    description:
-      "Unlock exciting rewards based on donation tiers. Your generosity deserves recognition, and we're excited to offer special incentives as a token of our gratitude.",
-  },
-];
+import { Donator } from "./Donator";
+import { ShareDialog } from "./Share";
+import { generalLink } from "~/utils/links";
+import { Link } from "@remix-run/react";
 
 type CardProps = React.ComponentProps<typeof Card>;
 
+const donators = [
+  { name: "Emily Thompson", amount: 50.0, howLongAgo: "1 minute ago" },
+  { name: "Alex Rodriguez", amount: 100.0, howLongAgo: "3 minutes ago" },
+  { name: "Sarah Johnson", amount: 25.0, howLongAgo: "5 minutes ago" },
+  { name: "Michael Chen", amount: 75.0, howLongAgo: "34 minutes ago" },
+  { name: "Emma Davis", amount: 200.0, howLongAgo: "1 hour ago" },
+];
+
 export function ProgressCard(props: CardProps) {
   return (
-    <Card className="w-full">
+    <Card className="flex flex-col justify-around w-full lg:h-[640px]">
       <CardHeader>
         <CardTitle>$131,22</CardTitle>
         <Progress value={65} className="h-2" />
         <CardDescription>raised out of $200</CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4">
-        <Button className="w-full">Donate now</Button>
-        <Button variant="outline" className="w-full">
-<Forward className="mr-2 w-4 h-4" />
-        Share</Button>
+        <Button className="w-full">
+          <Link to={generalLink} target="_blank">
+            Donate now
+          </Link>
+        </Button>
+        <ShareDialog />
       </CardContent>
-      <CardFooter>
-        <Donator />
+      <CardFooter className="flex flex-col items-start">
+        <span className="font-semibold text-lg">Recent donations</span>
+        {donators.map((donator) => (
+          <Donator {...donator} />
+        ))}
       </CardFooter>
     </Card>
   );

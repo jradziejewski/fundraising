@@ -10,6 +10,8 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
+import { Link } from "@remix-run/react";
+import { generalLink } from "~/utils/links";
 
 const features = [
   {
@@ -33,17 +35,20 @@ type CardProps = React.ComponentProps<typeof Card>;
 
 export function MainCard(props: CardProps) {
   return (
-    <Card className="w-full">
+    <Card className="flex flex-col justify-around w-full lg:h-[640px]">
+      {" "}
       <CardHeader>
         <CardTitle>ChangeMakers Fund</CardTitle>
-        <CardDescription>created by John Doe 2 days ago</CardDescription>
+        <CardDescription>@JohnDoe, 2 days ago</CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4">
-        <Speech />
         <div className="flex-1 space-y-1">
-          <p className="font-medium leading-none">
-            Join us in making difference!
-          </p>
+          <div className="flex items-center gap-4">
+            <Speech />
+            <p className="font-medium leading-none">
+              Join us in making difference!
+            </p>
+          </div>
           <p className="text-sm p-2">
             ChangeMakers Fund is a dynamic initiative where your support fuels
             impactful projects, ranging from hiring talented personnel to
@@ -53,7 +58,7 @@ export function MainCard(props: CardProps) {
           </p>
         </div>
         <div>
-          {features.map((notification, index) => (
+          {features.map((feature, index) => (
             <div
               key={index}
               className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
@@ -61,10 +66,10 @@ export function MainCard(props: CardProps) {
               <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
               <div className="space-y-1">
                 <p className="text-sm font-medium leading-none">
-                  {notification.title}
+                  {feature.title}
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  {notification.description}
+                  {feature.description}
                 </p>
               </div>
             </div>
@@ -72,8 +77,11 @@ export function MainCard(props: CardProps) {
         </div>
       </CardContent>
       <CardFooter>
-        <Button className="w-full">
-          <Coins className="mr-2 h-6 w-6" /> Donate now
+        <Button className="w-full hidden lg:flex">
+          <Coins className="mr-2 h-6 w-6" />
+          <Link to={generalLink} target="_blank">
+            Donate now
+          </Link>
         </Button>
       </CardFooter>
     </Card>

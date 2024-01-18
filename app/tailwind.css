@@ -27,7 +27,8 @@
     --radius: 0.5rem;
   }
 
-  .dark {
+  .dark,
+  :root[class~="dark"] {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
     --card: 222.2 84% 4.9%;
@@ -61,8 +62,8 @@
 
 .content-grid {
     --padding-inline: 2rem;
-    --content-max-width: 90ch;
-    --breakout-max-width: 100ch;
+    --content-max-width: 110ch;
+    --breakout-max-width: 120ch;
     
     --breakout-size: calc((var(--breakout-max-width) - var(--content-max-width)) / 2);
 
